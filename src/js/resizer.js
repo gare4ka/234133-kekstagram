@@ -126,6 +126,35 @@
       // некорректно сработает даже очистка холста или нужно будет использовать
       // сложные рассчеты для координат прямоугольника, который нужно очистить.
       this._ctx.restore();
+
+      // Рисование затемненного окружения выделенной области
+      this._ctx.fillStyle = 'rgba(0, 0, 0, 0.8)';
+      this._ctx.fillRect(
+          0,
+          0,
+          this._container.width / 2 - this._resizeConstraint.side / 2 - this._ctx.lineWidth,
+          this._container.height);
+      this._ctx.fillRect(
+          this._container.width,
+          0,
+          (-this._container.width / 2) + this._resizeConstraint.side / 2 - this._ctx.lineWidth / 2,
+          this._container.height);
+      this._ctx.fillRect(
+          this._container.width / 2 - this._resizeConstraint.side / 2 - this._ctx.lineWidth,
+          0,
+          this._resizeConstraint.side + this._ctx.lineWidth / 2,
+          this._container.height / 2 - this._resizeConstraint.side / 2 - this._ctx.lineWidth);
+      this._ctx.fillRect(
+          this._container.width / 2 - this._resizeConstraint.side / 2 - this._ctx.lineWidth,
+          this._container.height,
+          this._resizeConstraint.side + this._ctx.lineWidth / 2,
+          (-this._container.height / 2) + this._resizeConstraint.side / 2 - this._ctx.lineWidth / 2);
+
+      // Вывод размеров изображения
+      this._ctx.font = '14px Arial';
+      this._ctx.fillStyle = '#fff';
+      this._ctx.textAlign = 'Center';
+      this._ctx.fillText(this._container.width + 'x' + this._container.height, this._container.width / 2 - 20, 20);
     },
 
     /**
