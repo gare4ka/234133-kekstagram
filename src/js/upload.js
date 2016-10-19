@@ -171,6 +171,42 @@
   };
 
   /**
+   * Валидация формы кадрирования изображения
+   * Ограничения на ввод:
+   * сумма полей "слева" и "сторона" не больше ширины исходного изображения
+   * сумма полей "сверху" и "сторона" не больше высоты исходного изображения
+   * поля "сверху" и "слева" больше нуля
+   */
+  var resizeSize = document.getElementById('resize-size');
+  var resizeX = document.getElementById('resize-x');
+  var resizeY = document.getElementById('resize-y');
+  var uploadButton = document.getElementById('resize-fwd');
+
+  resizeX.min = 0;
+  resizeY.min = 0;
+
+  var addDisableAttr = function() {
+    if (
+      ((+resizeSize.value + +resizeX.value) >= currentResizer._image.naturalWidth) || ((+resizeSize.value + +resizeY.value) >= currentResizer._image.naturalHeight)) {
+      uploadButton.setAttribute('disabled', 'disabled');
+    } else {
+      uploadButton.removeAttribute('disabled');
+    }
+  };
+
+  resizeX.oninput = function() {
+    addDisableAttr();
+  };
+
+  resizeY.oninput = function() {
+    addDisableAttr();
+  };
+
+  resizeSize.oninput = function() {
+    addDisableAttr();
+  };
+
+  /**
    * Обработка сброса формы кадрирования. Возвращает в начальное состояние
    * и обновляет фон.
    * @param {Event} evt
