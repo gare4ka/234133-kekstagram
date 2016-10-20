@@ -185,7 +185,7 @@
   resizeX.min = 0;
   resizeY.min = 0;
 
-  var validateResizeParams = function() {
+  var validateResizeForm = function() {
     if (
       ((+resizeSize.value + +resizeX.value) >= currentResizer._image.naturalWidth) || ((+resizeSize.value + +resizeY.value) >= currentResizer._image.naturalHeight)) {
       return true
@@ -195,7 +195,7 @@
   };
 
   var setDisableAttr = function() {
-    if (validateResizeParams() == true) {
+    if (validateResizeForm() == true) {
       uploadButton.setAttribute('disabled', 'disabled');
     } else {
       uploadButton.removeAttribute('disabled');
