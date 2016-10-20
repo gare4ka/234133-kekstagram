@@ -188,19 +188,19 @@
   var validateResizeForm = function() {
     if (
       ((+resizeSize.value + +resizeX.value) >= currentResizer._image.naturalWidth) || ((+resizeSize.value + +resizeY.value) >= currentResizer._image.naturalHeight)) {
-      return true
+      return true;
     } else {
-      return false
+      return false;
     }
   };
 
   var setDisableAttr = function() {
-    if (validateResizeForm() == true) {
+    if (validateResizeForm() === true) {
       uploadButton.setAttribute('disabled', 'disabled');
     } else {
       uploadButton.removeAttribute('disabled');
     }
-  }
+  };
 
   resizeX.oninput = function() {
     setDisableAttr();
