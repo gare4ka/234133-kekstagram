@@ -185,25 +185,33 @@
   resizeX.min = 0;
   resizeY.min = 0;
 
-  var addDisableAttr = function() {
+  var validateResizeParams = function() {
     if (
       ((+resizeSize.value + +resizeX.value) >= currentResizer._image.naturalWidth) || ((+resizeSize.value + +resizeY.value) >= currentResizer._image.naturalHeight)) {
+      return true
+    } else {
+      return false
+    }
+  };
+
+  var setDisableAttr = function() {
+    if (validateResizeParams() == true) {
       uploadButton.setAttribute('disabled', 'disabled');
     } else {
       uploadButton.removeAttribute('disabled');
     }
-  };
+  }
 
   resizeX.oninput = function() {
-    addDisableAttr();
+    setDisableAttr();
   };
 
   resizeY.oninput = function() {
-    addDisableAttr();
+    setDisableAttr();
   };
 
   resizeSize.oninput = function() {
-    addDisableAttr();
+    setDisableAttr();
   };
 
   /**
