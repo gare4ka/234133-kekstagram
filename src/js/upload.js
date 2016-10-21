@@ -195,7 +195,7 @@
   };
 
   var setDisableAttr = function() {
-    if (validateResizeForm() === true) {
+    if (validateResizeForm()) {
       uploadButton.setAttribute('disabled', 'disabled');
     } else {
       uploadButton.removeAttribute('disabled');
