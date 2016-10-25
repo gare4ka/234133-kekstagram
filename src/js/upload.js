@@ -1,4 +1,5 @@
 /* global Resizer: true */
+/* global Cookies */
 
 /**
  * @fileoverview
@@ -282,6 +283,9 @@
    * Обработчик изменения фильтра. Добавляет класс из filterMap соответствующий
    * выбранному значению в форме.
    */
+  filterImage.classList.remove('filter-none');
+  filterImage.classList.add(Cookies.get('upload-filter'));
+
   filterForm.onchange = function() {
     if (!filterMap) {
       // Ленивая инициализация. Объект не создается до тех пор, пока
@@ -303,6 +307,24 @@
     // убрать предыдущий примененный класс. Для этого нужно или запоминать его
     // состояние или просто перезаписывать.
     filterImage.className = 'filter-image-preview ' + filterMap[selectedFilter];
+  };
+
+  var countDaysFromGrace = function() {
+    var now = new Date();
+    var graceBirthday = new Date(now.getFullYear(), 11, 9);
+
+    if (graceBirthday > now) {
+      graceBirthday = new Date((now.getFullYear() - 1), 11, 9);
+    }
+
+    return Math.floor((now - graceBirthday) / 86400000);
+  };
+
+  var filterForwardButton = document.getElementById('filter-fwd');
+
+  filterForwardButton.onclick = function() {
+    var currentFilter = document.getElementsByClassName('filter-image-preview')[0].classList[1];
+    Cookies.set('upload-filter', currentFilter, { expires: countDaysFromGrace()});
   };
 
   cleanupResizer();
