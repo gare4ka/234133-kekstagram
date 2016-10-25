@@ -309,9 +309,9 @@
     filterImage.className = 'filter-image-preview ' + filterMap[selectedFilter];
   };
 
-  var countDaysFromGrace = function(now, graceBirthday) {
-    now = new Date();
-    graceBirthday = new Date(now.getFullYear(), 11, 9);
+  var countDaysFromGrace = function() {
+    var now = new Date();
+    var graceBirthday = new Date(now.getFullYear(), 11, 9);
 
     if (graceBirthday > now) {
       graceBirthday = new Date((now.getFullYear() - 1), 11, 9);
@@ -322,8 +322,8 @@
 
   var filterForwardButton = document.getElementById('filter-fwd');
 
-  filterForwardButton.onclick = function(currentFilter) {
-    currentFilter = document.getElementsByClassName('filter-image-preview')[0].classList[1];
+  filterForwardButton.onclick = function() {
+    var currentFilter = document.getElementsByClassName('filter-image-preview')[0].classList[1];
     Cookies.set('upload-filter', currentFilter, { expires: countDaysFromGrace()});
   };
 
