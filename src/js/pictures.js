@@ -3,7 +3,7 @@
 var filtersForm = document.querySelector('.filters');
 filtersForm.classList.add('hidden');
 
-var PICTURES_LOAD_URL = 'js/data-pictures.js';
+var PICTURES_LOAD_URL = 'http://localhost:1507/api/pictures';
 
 var container = document.querySelector('.pictures');
 var template = document.querySelector('template');
