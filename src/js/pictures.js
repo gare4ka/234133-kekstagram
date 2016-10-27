@@ -1,5 +1,8 @@
 'use strict';
 
+var filtersForm = document.querySelector('.filters');
+filtersForm.classList.add('hidden');
+
 var PICTURES_LOAD_URL = 'js/data-pictures.js';
 
 var container = document.querySelector('.pictures');
@@ -22,17 +25,19 @@ var load = function(url, callback, callbackName) {
 
 var getPicture = function(picture) {
   var pictureElement = templateContainer.querySelector('.picture').cloneNode(true);
-  pictureElement.querySelector('picture-comments').textContent = picture.comments;
-  pictureElement.querySelector('picture-likes').textContent = picture.likes;
+  pictureElement.querySelector('.picture-comments').textContent = picture.comments;
+  pictureElement.querySelector('.picture-likes').textContent = picture.likes;
 
   var image = new Image(182, 182);
   image.onload = function() {
-    image.src = picture.url;
+    pictureElement.querySelector('img').src = './' + picture.url;
   };
 
   image.onerror = function() {
     pictureElement.classList.add('picture-load-failure');
   };
+
+  image.src = picture.url;
 
   return pictureElement;
 };
@@ -44,3 +49,4 @@ var renderPictures = function(pictures) {
 };
 
 load(PICTURES_LOAD_URL, renderPictures, '__jsonpCallback');
+filtersForm.classList.remove('hidden');
