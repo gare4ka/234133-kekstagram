@@ -1,6 +1,6 @@
 'use strict';
 
-var PICTURES_LOAD_URL = '../bin/data/data.json';
+var PICTURES_LOAD_URL = 'js/data-pictures.js';
 
 var container = document.querySelector('.pictures');
 var template = document.querySelector('template');
@@ -26,15 +26,13 @@ var getPicture = function(picture) {
   pictureElement.querySelector('picture-likes').textContent = picture.likes;
 
   var image = new Image(182, 182);
-  image.onload = function(event) {
-    pictureElement.setAttribute('src', 'url(\'' + event.target.src + '\')');
+  image.onload = function() {
+    image.src = picture.url;
   };
 
   image.onerror = function() {
     pictureElement.classList.add('picture-load-failure');
   };
-
-  image.src = picture.url;
 
   return pictureElement;
 };
@@ -45,4 +43,4 @@ var renderPictures = function(pictures) {
   });
 };
 
-load(PICTURES_LOAD_URL, renderPictures);
+load(PICTURES_LOAD_URL, renderPictures, '__jsonpCallback');
